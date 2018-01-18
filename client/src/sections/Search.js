@@ -38,12 +38,13 @@ class Search extends React.Component {
         return (
             <div>
                 <div className="container">
+                    <h1 className="title">New York Times React App</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label for="inputTopic">
                                 Topic
                     </label>
-                    <br/>
+                            <br />
 
                             <input name="topic" type="text" value={this.state.topic} onChange={this.handleChange} />
                         </div >
@@ -54,7 +55,7 @@ class Search extends React.Component {
                             <label>
                                 Start Year
                     </label>
-                    <br/>
+                            <br />
 
                             <input name="startYear" type="text" value={this.state.startYear} onChange={this.handleChange} />
                         </div>
@@ -65,7 +66,7 @@ class Search extends React.Component {
                             <label>
                                 End Year
                     </label>
-                    <br/>
+                            <br />
 
                             <input name="endYear" type="text" value={this.state.endYear} onChange={this.handleChange} />
                         </div>
