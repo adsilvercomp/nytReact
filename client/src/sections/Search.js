@@ -1,5 +1,6 @@
 import React from "react";
 import Results from "../components/Results"
+import API from "../utils/API"
 console.log(Results);
 
 class Search extends React.Component {
@@ -12,6 +13,16 @@ class Search extends React.Component {
             articles: ["ASP", "Hek", "hi"]
         };
     }
+
+    componentDidMount(){
+        this.loadArticles();
+    }
+
+    loadArticles = () => {
+        API.getArticles()
+        .then(res => this.setState ({articles: res.data}))
+        .catch(err => console.log(err));
+    };
 
 
     handleChange = (event) => {
@@ -29,7 +40,7 @@ class Search extends React.Component {
     }
 
     handleSubmit = (event) => {
-        alert('A name was submitted: ' + this.state.topic + this.state.startYear + this.state.endYear);
+        alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
         event.preventDefault();
     }
 
@@ -57,7 +68,7 @@ class Search extends React.Component {
                     </label>
                             <br />
 
-                            <input name="startYear" type="text" value={this.state.startYear} onChange={this.handleChange} />
+                            <input name="startYear" type="text" value={this.state.beginDate} onChange={this.handleChange} />
                         </div>
                         <br />
 
@@ -68,7 +79,7 @@ class Search extends React.Component {
                     </label>
                             <br />
 
-                            <input name="endYear" type="text" value={this.state.endYear} onChange={this.handleChange} />
+                            <input name="endYear" type="text" value={this.state.endDate} onChange={this.handleChange} />
                         </div>
                         <br />
 
