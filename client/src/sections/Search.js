@@ -7,22 +7,16 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            topic: '',
-            startYear: '',
-            endYear: '',
-            articles: ["ASP", "Hek", "hi"]
+            topic: 'Trump',
+            beginDate: '20170101',
+            endDate: '20180118',
+            articles: ["hello", "Aaron", "hello"]
         };
     }
 
-    componentDidMount(){
-        this.loadArticles();
-    }
 
-    loadArticles = () => {
-        API.getArticles()
-        .then(res => this.setState ({articles: res.data}))
-        .catch(err => console.log(err));
-    };
+
+
 
 
     handleChange = (event) => {
@@ -40,8 +34,19 @@ class Search extends React.Component {
     }
 
     handleSubmit = (event) => {
-        alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
         event.preventDefault();
+
+        API.getArticles({
+            topic: this.state.topic,
+            beginDate: this.state.beginDate,
+            endDate: this.state.endDate
+        })
+            //setState should be set to the api response.
+            .then(res => this.setState({ articles: ["new", "people", "hello"] }))
+            .catch(err => console.log("There is an error" + err));
+
+        // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
+
     }
 
 
@@ -52,7 +57,7 @@ class Search extends React.Component {
                     <h1 className="title">New York Times React App</h1>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label for="inputTopic">
+                            <label htmlFor="inputTopic">
                                 Topic
                     </label>
                             <br />
@@ -68,7 +73,7 @@ class Search extends React.Component {
                     </label>
                             <br />
 
-                            <input name="startYear" type="text" value={this.state.beginDate} onChange={this.handleChange} />
+                            <input name="beginDate" type="text" value={this.state.beginDate} onChange={this.handleChange} />
                         </div>
                         <br />
 
@@ -79,7 +84,7 @@ class Search extends React.Component {
                     </label>
                             <br />
 
-                            <input name="endYear" type="text" value={this.state.endDate} onChange={this.handleChange} />
+                            <input name="endDate" type="text" value={this.state.endDate} onChange={this.handleChange} />
                         </div>
                         <br />
 
@@ -89,7 +94,7 @@ class Search extends React.Component {
                 </div>
 
                 <div className="container">
-                    <h1 class="title">Article Response</h1>
+                    <h1 className="title">Article Response</h1>
                     <br />
                     <Results
                         articles={this.state.articles}
