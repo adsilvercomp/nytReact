@@ -1,6 +1,7 @@
 import React from "react";
 import Results from "../components/Results"
 import API from "../utils/API"
+import Nav from "../components/NavBar"
 console.log(Results);
 
 class Search extends React.Component {
@@ -67,6 +68,7 @@ class Search extends React.Component {
     render() {
         return (
             <div>
+                <Nav/>
                 <div className="container">
                     <h1 className="title">New York Times React App</h1>
                     <form onSubmit={this.handleSubmit}>
