@@ -8,10 +8,15 @@ class Saved extends React.Component {
     render() {
         return (
             <div>
-                <NavBar/>
-            <h1>hello</h1>
+                <NavBar />
+                <div className="container">
+                    <h1 className="title">Saved Articles</h1>
+                    <br />
+                </div>
 
             </div>
+
+
         )
     }
 
