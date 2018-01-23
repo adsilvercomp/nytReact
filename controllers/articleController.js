@@ -5,13 +5,6 @@ const axios = require("axios");
 
 const articleFunction = {
     getArticles: function (req, res) {
-        // console.log(req.body);
-        // console.log("query " + req.body);
-        // console.log("params " + req.params);
-        // console.log("query " + req.query);
-        // console.log("topic " + req.query.topic);
-        // console.log("beginDate " + req.query.beginDate);
-        // console.log("endDate " + req.query.endDate);
         axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json", {
             params: {
                 "api-key": "ded0f4e6c7134d81ac76e8c881189fe1",
@@ -22,19 +15,13 @@ const articleFunction = {
         }).then(function (data) {
             console.log(data.data.response);
             console.log(res); 
-            // console.log("res ", res.data.response); 
             res.json(data.data.response);
-            // res.sendFile(res.data.response);
-            // console.log("hello-------------------");
+           
 
         }).catch(function (err) {
             console.log(err);
         })
-
-
     }
-
-
 }
 router.get("/api/articles", articleFunction.getArticles)
 

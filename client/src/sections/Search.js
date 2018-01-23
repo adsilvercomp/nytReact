@@ -42,8 +42,12 @@ class Search extends React.Component {
             endDate: this.state.endDate
         })
             //setState should be set to the api response.
-        .then(res => console.log(res))
-        .catch(err => console.log("There is an error" + err));
+            //    .then(res => this.setState({articles: res.data.docs })) 
+            //you need the title, the date and the url
+            // .then(res => console.log(res.data.docs[0].headline.main))
+            // res.data.docs[0].web_url
+            .then(res => this.setState( {articles: [res.data.docs[0].headline]}))
+            .catch(err => console.log("There is an error" + err));
 
         // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
         console.log(this.state.articles);
