@@ -7,10 +7,10 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            topic: 'Trump',
+            topic: 'New York',
             beginDate: '20170101',
             endDate: '20180118',
-            articles: ["hello", "Aaron", "hello"]
+            articles: ["hello", "Aaron", "people"]
         };
     }
 
@@ -42,11 +42,12 @@ class Search extends React.Component {
             endDate: this.state.endDate
         })
             //setState should be set to the api response.
-            .then(res => this.setState({ articles: ["new", "people", "hello"] }))
-            .catch(err => console.log("There is an error" + err));
+        .then(res => console.log(res))
+        .catch(err => console.log("There is an error" + err));
 
         // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
-
+        console.log(this.state.articles);
+        console.log(API.getArticles);
     }
 
 
