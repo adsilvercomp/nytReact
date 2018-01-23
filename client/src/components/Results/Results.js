@@ -7,8 +7,13 @@ const Results = (props) => (
 
 
         props.articles.map(article => (
-
-            <h3>{"Title: " + article.main}</h3>
+            <div>
+            <h3>{"Title: "+article}</h3>
+            <h3>{"URL: " + article.web_url}</h3>
+            <h3>{"Date: "+article.pub_date}</h3>
+            <hr/>
+            </div>
+            
             // <h3>{"Headline: " + article[0].date}</h3>
             // <h3>{"Date:" + }</h3>
             

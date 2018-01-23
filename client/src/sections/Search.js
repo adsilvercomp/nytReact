@@ -10,7 +10,7 @@ class Search extends React.Component {
             topic: 'New York',
             beginDate: '20170101',
             endDate: '20180118',
-            articles: ["hello", "Aaron", "people"]
+            articles: []
         };
     }
 
@@ -42,11 +42,20 @@ class Search extends React.Component {
             endDate: this.state.endDate
         })
             //setState should be set to the api response.
-            //    .then(res => this.setState({articles: res.data.docs })) 
+            
+            
             //you need the title, the date and the url
             // .then(res => console.log(res.data.docs[0].headline.main))
             // res.data.docs[0].web_url
-            .then(res => this.setState( {articles: [res.data.docs[0].headline]}))
+            //.then(res => this.setState( {articles: [res.data.docs[0].headline]}))
+            .then( res => {
+                 let artArray = []
+                for(let x = 0; x< res.data.docs.length; x++){
+                    artArray.push(res.data.docs[x])
+                }
+                console.log(artArray);
+                this.setState({articles: artArray});
+            })
             .catch(err => console.log("There is an error" + err));
 
         // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
