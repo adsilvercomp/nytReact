@@ -8,9 +8,9 @@ const Results = (props) => (
 
         props.articles.map(article => (
             <div>
-            <h3>{"Title: "+article}</h3>
+            <h3>{"Title: "+ article.headline.main}</h3>
             <h3>{"URL: " + article.web_url}</h3>
-            <h3>{"Date: "+article.pub_date}</h3>
+            <h3>{"Date: "+ article.pub_date}</h3>
             <hr/>
             </div>
             
