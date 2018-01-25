@@ -21,8 +21,10 @@ class Search extends React.Component {
         API.saveArticles({
             name: articleName, 
             url: articleUrl,
-            date: articleDate
+            article_Date: articleDate
         })
+        .then(console.log(res => console.log(res) ))
+        .catch(err=> console.log("Save error: " + err));
     }
 
 
