@@ -1,1 +1,8 @@
-export { default } from "./Results";
+import Results from "./Results";
+import ResultItem from "./ResultItem";
+
+
+export {
+    Results,
+    ResultItem
+}

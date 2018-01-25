@@ -12,12 +12,19 @@ export default {
         // const beginDate = articles.beginDate
         // const endDate = articles.endDate
         console.log(search);
-        return axios.get("/api/articles", {params:search})
-            }
-           
-    
+        return axios.get("/api/articles", { params: search })
+    },
+
+
+    saveArticles: function (save) {
+        console.log(save)
+        return axios.get("/api/save", { save })
+    }
+
+
 
 };
+
 
 
 

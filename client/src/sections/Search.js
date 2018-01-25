@@ -1,5 +1,5 @@
 import React from "react";
-import Results from "../components/Results"
+import { Results, ResultItem } from "../components/Results"
 import API from "../utils/API"
 import Nav from "../components/NavBar"
 console.log(Results);
@@ -15,9 +15,15 @@ class Search extends React.Component {
         };
     }
 
+    saveArticle = (articleName, articleUrl, articleDate) => {
+        console.log("SAVE ARTICLE FUNCTION" + articleName);
 
-
-
+        API.saveArticles({
+            name: articleName, 
+            url: articleUrl,
+            date: articleDate
+        })
+    }
 
 
     handleChange = (event) => {
@@ -42,21 +48,22 @@ class Search extends React.Component {
             beginDate: this.state.beginDate,
             endDate: this.state.endDate
         })
-            //setState should be set to the api response.
-            
-            
+            //setState should be set to the api response.      
+
+
             //you need the title, the date and the url
             // .then(res => console.log(res.data.docs[0].headline.main))
             // res.data.docs[0].web_url
             //.then(res => this.setState( {articles: [res.data.docs[0].headline]}))
-            .then( res => {
-                 let artArray = []
-                for(let x = 0; x< res.data.docs.length; x++){
+            .then(res => {
+                let artArray = []
+                for (let x = 0; x < res.data.docs.length; x++) {
                     artArray.push(res.data.docs[x])
                 }
-                console.log(artArray);
-                this.setState({articles: artArray});
-            })
+                console.log("artArray" + artArray);
+                this.setState({ articles: artArray });
+            }
+            )
             .catch(err => console.log("There is an error" + err));
 
         // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
@@ -65,10 +72,13 @@ class Search extends React.Component {
     }
 
 
+
+
+
     render() {
         return (
             <div>
-                <Nav/>
+                <Nav />
                 <div className="container">
                     <h1 className="title">New York Times React App</h1>
                     <form onSubmit={this.handleSubmit}>
@@ -112,9 +122,27 @@ class Search extends React.Component {
                 <div className="container">
                     <h1 className="title">Article Response</h1>
                     <br />
-                    <Results
-                        articles={this.state.articles}
-                    />
+                    <Results>
+                        {this.state.articles.map(article => {
+                            return (
+                                
+                                    <ResultItem  >
+                                        <strong>
+                                        {"Title: " + article.headline.main}
+                                        <br />
+                                        {"URL: " + article.web_url}
+                                        <br />
+                                        {"Date: " + article.pub_date}
+                                        <br />
+                                        </strong>
+
+                                        <button onClick={() => this.saveArticle(article.headline.main, article.web_url, article.pub_date )}>Save</button>
+                                    </ResultItem>
+                               
+                            );
+                            
+                        })}
+                    </Results>
                 </div>
             </div>
 

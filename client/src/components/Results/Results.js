@@ -1,39 +1,47 @@
 import React from "react";
+import "./Results.css";
 
+class Results extends React.Component {
 
-
-const Results = (props) => (
-        
-
-
-        props.articles.map(article => (
-            <div>
-            <h3>{"Title: "+ article.headline.main}</h3>
-            <h3>{"URL: " + article.web_url}</h3>
-            <h3>{"Date: "+ article.pub_date}</h3>
-            <input type="submit" value="Save Article" />
-            <hr/>
+    render() {
+        return (
+            <div className="list-overflow-container">
+              <ul className="list-group">
+                {this.props.children}
+              </ul>
             </div>
-            
-            // <h3>{"Headline: " + article[0].date}</h3>
-            // <h3>{"Date:" + }</h3>
-            
-        ))
-        
-            
-    )
-
-    
-
-
-
-
-
-
-
-
+          );
+    }
+}
 
 
 
 
 export default Results;
+
+
+
+
+
+
+
+// const Results = (props) => (
+
+    
+
+  
+//     props.articles.map(article => (
+//         <div key={article.headline.main} >   
+        
+//            <h4> {"Title: " + article.headline.main}</h4>
+//            <h4> {"URL: " + article.web_url} </h4>
+//            <h4> {"Date: " + article.pub_date} </h4>
+//             {/* <input type="submit" value="Save Article" /> */}
+//             <button onClick ={this.saveArticle(article.headline.main)}>Save Article</button>
+//             <hr />
+    
+//         </div>
+//     ))
+    
+
+// )
