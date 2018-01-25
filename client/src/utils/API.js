@@ -18,7 +18,7 @@ export default {
 
     saveArticles: function (save) {
         console.log(save)
-        return axios.get("/api/save", { save })
+        return axios.post("/api/articles", save);
     }
 
 

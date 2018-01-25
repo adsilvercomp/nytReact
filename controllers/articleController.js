@@ -1,7 +1,8 @@
 const path = require("path");
 const router = require("express").Router();
 const axios = require("axios");
-// const db = require("../models");
+const db = require("../models");
+
 
 const articleFunction = {
     getArticles: function (req, res) {
@@ -14,16 +15,26 @@ const articleFunction = {
             }
         }).then(function (data) {
             console.log(data.data.response);
-            console.log(res); 
+            console.log(res);
             res.json(data.data.response);
-           
+
 
         }).catch(function (err) {
             console.log(err);
         })
+    },
+
+    create: function (req, res) {
+        console.log(req.body)
+        db.article
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+
     }
 }
 router.get("/api/articles", articleFunction.getArticles)
+router.post("/api/articles", articleFunction.create)
 
 
 // If no API routes are hit, send the React app
