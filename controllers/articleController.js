@@ -14,8 +14,6 @@ const articleFunction = {
                 "end_date": req.endDate
             }
         }).then(function (data) {
-            console.log(data.data.response);
-            console.log(res);
             res.json(data.data.response);
 
 
@@ -25,7 +23,6 @@ const articleFunction = {
     },
 
     create: function (req, res) {
-        console.log("req.body Hola " + req.body)
         console.log(JSON.stringify(req.body));
         db.article
             .create(req.body)
@@ -33,17 +30,25 @@ const articleFunction = {
             .catch(err => console.log(err));
     },
 
-    getSaved: function(req, res){
-        console.log("hello");
+    getSaved: function (req, res) {
         db.article
-        .find(req.query)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+            .find(req.query)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    remove: function (req, res) {
+        db.article
+            .findById({ _id: req.params.id })
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 }
 router.get("/api/articles", articleFunction.getArticles)
 router.post("/api/articles", articleFunction.create)
 router.get("/api/articles/saved", articleFunction.getSaved)
+router.delete("/api/articles/delete:id", articleFunction.remove)
 
 
 // If no API routes are hit, send the React app

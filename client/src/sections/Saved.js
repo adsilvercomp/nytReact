@@ -17,7 +17,6 @@ class Saved extends React.Component {
     //reading from the database
 
     componentDidMount() {
-        console.log("component did mount is working");
         this.loadArticles();
     }
 
@@ -29,16 +28,18 @@ class Saved extends React.Component {
                 for (let x = 0; x < res.data.length; x++) {
                     savedArray.push(res.data[x])
                 }
-                console.log(savedArray);
                 this.setState({ saved: savedArray });
-                console.log(this.state.saved);
             }
             )
             .catch(err => console.log(err));
     };
 
-    deleteArticle = () => {
-        console.log("this is the delete article function")
+    deleteArticle = id => {
+        // console.log("article id " + id );
+        API.delete(id)
+            .then(res => this.loadArticles())
+            .catch(err => console.log(err));
+
     }
 
 
@@ -53,27 +54,27 @@ class Saved extends React.Component {
                     <br />
 
                     <div className="savedArticles">
-                    <Articles>
-                        {this.state.saved.map(article => {
-                            return (
-                                
-                                    <IndividualArticles  >
+                        <Articles>
+                            {this.state.saved.map(article => {
+                                return (
+
+                                    <IndividualArticles >
                                         <strong>
-                                        {"Title: " + article.name}
-                                        <br />
-                                        {"URL: " + article.url}
-                                        <br />
-                                        {"Date: " + article.article_Date}
-                                        <br />
+                                            {"Title: " + article.name}
+                                            <br />
+                                            {"URL: " + article.url}
+                                            <br />
+                                            {"Date: " + article.article_Date}
+                                            <br />
                                         </strong>
 
-                                        <button onClick={() => this.deleteArticle(article.headline.main, article.web_url, article.pub_date )}>Delete</button>
+                                        <button onClick={() => this.deleteArticle(article._id)}>Delete</button>
                                     </IndividualArticles>
-                               
-                            );
-                            
-                        })}
-                    </Articles>
+
+                                );
+
+                            })}
+                        </Articles>
 
                     </div>
 

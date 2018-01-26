@@ -3,7 +3,7 @@ import { Results, ResultItem } from "../components/Results"
 import API from "../utils/API"
 import Nav from "../components/NavBar"
 
-console.log(Results);
+
 
 class Search extends React.Component {
     constructor(props) {
@@ -17,31 +17,26 @@ class Search extends React.Component {
     }
 
     saveArticle = (articleName, articleUrl, articleDate) => {
-        console.log("SAVE ARTICLE FUNCTION" + articleName);
 
         API.saveArticles({
-            name: articleName, 
+            name: articleName,
             url: articleUrl,
             article_Date: articleDate
         })
-        .then(res => console.log(res))
-        .catch(err=> console.log("Save error: " + err));
+            .then(res => console.log(res))
+            .catch(err => console.log("Save error: " + err));
     }
 
-    //loop through articles, push them to savedArray and create a function, in which you send the saved array to the saved.js page.
-    //create a saved state in the search page
-    //update the state of saved with saved Array 
-    //require the api page in the search page
-    //create a function in which a click even deletes articles from 
+
 
     handleChange = (event) => {
-        console.log(event);
+
         const target = event.target;
-        console.log("event target " + event.target);
+
         const value = target.value
-        console.log("target value " + target.value);
+
         const name = target.name;
-        console.log("target name " + target.name);
+
 
         this.setState({
             [name]: value
@@ -56,27 +51,20 @@ class Search extends React.Component {
             beginDate: this.state.beginDate,
             endDate: this.state.endDate
         })
-            //setState should be set to the api response.      
 
-
-            //you need the title, the date and the url
-            // .then(res => console.log(res.data.docs[0].headline.main))
-            // res.data.docs[0].web_url
-            //.then(res => this.setState( {articles: [res.data.docs[0].headline]}))
             .then(res => {
                 let artArray = []
                 for (let x = 0; x < res.data.docs.length; x++) {
                     artArray.push(res.data.docs[x])
                 }
-                console.log("artArray" + artArray);
+
                 this.setState({ articles: artArray });
             }
             )
             .catch(err => console.log("There is an error" + err));
 
         // alert('A name was submitted: ' + this.state.topic + this.state.beginDate + this.state.endDate);
-        console.log(this.state.articles);
-        console.log(API.getArticles);
+
     }
 
 
@@ -103,7 +91,7 @@ class Search extends React.Component {
 
                         <div className="form-group">
                             <label>
-                                Start Year
+                                Start Year (yyyymmdd)
                     </label>
                             <br />
 
@@ -114,7 +102,7 @@ class Search extends React.Component {
 
                         <div className="form-group">
                             <label>
-                                End Year
+                                End Year (yyyymmdd)
                     </label>
                             <br />
 
@@ -133,22 +121,22 @@ class Search extends React.Component {
                     <Results>
                         {this.state.articles.map(article => {
                             return (
-                                
-                                    <ResultItem  >
-                                        <strong>
+
+                                <ResultItem  >
+                                    <strong>
                                         {"Title: " + article.headline.main}
                                         <br />
                                         {"URL: " + article.web_url}
                                         <br />
                                         {"Date: " + article.pub_date}
                                         <br />
-                                        </strong>
+                                    </strong>
 
-                                        <button onClick={() => this.saveArticle(article.headline.main, article.web_url, article.pub_date )}>Save</button>
-                                    </ResultItem>
-                               
+                                    <button onClick={() => this.saveArticle(article.headline.main, article.web_url, article.pub_date)}>Save</button>
+                                </ResultItem>
+
                             );
-                            
+
                         })}
                     </Results>
                 </div>
