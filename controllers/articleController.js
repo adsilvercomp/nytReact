@@ -31,11 +31,19 @@ const articleFunction = {
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => console.log(err));
+    },
 
+    getSaved: function(req, res){
+        console.log("hello");
+        db.article
+        .find(req.query)
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
 }
 router.get("/api/articles", articleFunction.getArticles)
 router.post("/api/articles", articleFunction.create)
+router.get("/api/articles/saved", articleFunction.getSaved)
 
 
 // If no API routes are hit, send the React app

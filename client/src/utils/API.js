@@ -19,6 +19,11 @@ export default {
     saveArticles: function (save) {
         console.log("save data " + save);
         return axios.post("/api/articles", save);
+    }, 
+
+    getSaved: function(){
+        console.log("get saved has been hit");
+        return axios.get("/api/articles/saved")
     }
 
 

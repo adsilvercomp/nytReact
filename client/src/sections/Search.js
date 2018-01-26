@@ -2,6 +2,7 @@ import React from "react";
 import { Results, ResultItem } from "../components/Results"
 import API from "../utils/API"
 import Nav from "../components/NavBar"
+
 console.log(Results);
 
 class Search extends React.Component {
@@ -11,7 +12,8 @@ class Search extends React.Component {
             topic: 'New York',
             beginDate: '20170101',
             endDate: '20180118',
-            articles: []
+            articles: [],
+            saved: []
         };
     }
 
@@ -23,10 +25,15 @@ class Search extends React.Component {
             url: articleUrl,
             article_Date: articleDate
         })
-        .then(console.log(res => console.log(res) ))
+        .then(res => console.log(res))
         .catch(err=> console.log("Save error: " + err));
     }
 
+    //loop through articles, push them to savedArray and create a function, in which you send the saved array to the saved.js page.
+    //create a saved state in the search page
+    //update the state of saved with saved Array 
+    //require the api page in the search page
+    //create a function in which a click even deletes articles from 
 
     handleChange = (event) => {
         console.log(event);
