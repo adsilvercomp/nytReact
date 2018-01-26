@@ -12,8 +12,7 @@ class Search extends React.Component {
             topic: 'New York',
             beginDate: '20170101',
             endDate: '20180118',
-            articles: [],
-            saved: []
+            articles: []
         };
     }
 
